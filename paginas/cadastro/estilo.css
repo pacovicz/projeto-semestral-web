@@ -12,6 +12,14 @@ body {
   font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial", sans-serif;
 }
 
+.menu {
+  background-color: #1d1d1f;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cadastro-container {
   display: flex;
   flex-direction: column;
@@ -81,4 +89,10 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+@media(max-width:600px) { 
+  .input-container {
+    width: 100%;
+  }
 }
