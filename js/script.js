@@ -12,8 +12,8 @@ function typeWriter() {
 
 typeWriter();
 
-let qtdCarrinho = 0;
-const produtos = [
+var qtdCarrinho = 0;
+var produtos = [
   {
     id: "1",
     nome: "MEN'S BETTER THAN NAKED&trade; JACKET",
@@ -30,15 +30,15 @@ const produtos = [
     imagem: "http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/enduro-boa-hydration-pack-AJQZ_JK3_hero.png"
   }
 ];
-const carrinho = [];
+var carrinho = [];
 
 function comprarProduto(id) {
-  const qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
+  var qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
   qtdCarrinhoIcon.classList.remove('escondido');
   qtdCarrinho++;
   qtdCarrinhoIcon.textContent = qtdCarrinho;
 
-  const produtoNoCarrinho = carrinho.find(function (item) {
+  var produtoNoCarrinho = carrinho.find(function (item) {
     return item.produto === id
   });
 
