@@ -12,17 +12,25 @@ function typeWriter() {
 
 typeWriter();
 
-let qtdCarrinho = 0;
 
 const carrinhoPersistido = JSON.parse(localStorage.getItem('carrinho'));
 const carrinho = carrinhoPersistido === null ? [] : carrinhoPersistido;
+
+const reducer = (valorAnterior, valorAtual) => valorAnterior + valorAtual;
+
+let qtdCarrinho = carrinho.length > 0 ? carrinho.map(x => x.qtd).reduce(reducer) : 0;
+
 const ELEMENTO_CARREGANDO = '<i class="fas fa-spinner fa-pulse"></i> Carregando...';
 
 function comprarProduto(id) {
   const qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
+  const qtdCarrinhoIconMobile = document.querySelector('.menu-mobile .qtd-carrinho');
+
   qtdCarrinhoIcon.classList.remove('escondido');
+  qtdCarrinhoIconMobile.classList.remove('escondido');
   qtdCarrinho++;
   qtdCarrinhoIcon.textContent = qtdCarrinho;
+  qtdCarrinhoIconMobile.textContent = qtdCarrinho;
 
   const produtoNoCarrinho = carrinho.find(item => item.produto === id);
 
@@ -45,6 +53,31 @@ function carregarPaginaPrincipal() {
   menuHamburguer.addEventListener('click', () => {
     menuMobile.classList.toggle('escondido');
   });
+
+  const qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
+  const qtdCarrinhoIconMobile = document.querySelector('.menu-mobile .qtd-carrinho');
+
+  qtdCarrinhoIcon.classList.remove('escondido');
+  qtdCarrinhoIconMobile.classList.remove('escondido');
+  qtdCarrinhoIcon.textContent = qtdCarrinho;
+  qtdCarrinhoIconMobile.textContent = qtdCarrinho;
+
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  if (usuario) {
+    const botoesLogin = Array.from(document.querySelectorAll('.botao.login'));
+
+    botoesLogin.forEach(botaoLogin => {
+      botaoLogin.href = '';
+      botaoLogin.innerHTML = 'Sair';
+      botaoLogin.addEventListener('click', () => {
+        localStorage.removeItem('usuario');
+        botaoLogin.innerHTML = 'Login';
+        setTimeout(() => {
+          botaoLogin.href = '/projeto-semestral-web/paginas/login/index.html';
+        }, 1000);
+      });
+    });
+  }
 
   const listaProdutos = document.querySelector('.produtos');
   listaProdutos.innerHTML = ELEMENTO_CARREGANDO;

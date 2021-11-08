@@ -95,6 +95,23 @@ a:hover {
   text-decoration: underline;
 }
 
+.erro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+
+  font-weight: bold;
+
+  color: #FFF;
+  background-color: #da3357;
+}
+
+.escondido {
+  display: none;
+}
+
 @media(max-width:600px) { 
   .input-container {
     width: 100%;

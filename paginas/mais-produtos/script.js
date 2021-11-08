@@ -1,4 +1,21 @@
 const ELEMENTO_CARREGANDO = '<i class="fas fa-spinner fa-pulse"></i> Carregando...';
+const carrinho = JSON.parse(localStorage.getItem('carrinho'));
+
+function comprarProduto(id) {
+  const produtoNoCarrinho = carrinho.find(item => item.produto === id);
+
+  if (produtoNoCarrinho) {
+    produtoNoCarrinho.qtd++;
+  }
+  else {
+    carrinho.push({
+      produto: id,
+      qtd: 1
+    });
+  }
+
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
 
 function carregarPaginaProdutos() {
   const listaProdutos = document.querySelector('.produtos');
@@ -22,7 +39,7 @@ function carregarPaginaProdutos() {
             <img
             src="${produto.imagem}">
             <span>${produto.nome}</span>
-            <a href="#">Comprar</a>
+            <a onclick="comprarProduto(${produto.id})">Comprar</a>
           </div>
         `;
       }
