@@ -12,43 +12,64 @@ function typeWriter() {
 
 typeWriter();
 
-var qtdCarrinho = 0;
-var produtos = [
-  {
-    id: "1",
-    nome: "MEN'S BETTER THAN NAKED&trade; JACKET",
-    imagem: "http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/mens-better-than-naked-jacket-AVMH_LC9_hero.png"
-  },
-  {
-    id: "2",
-    nome: "WOMEN'S BETTER THAN NAKED&trade; JACKET",
-    imagem: "http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/womens-better-than-naked-jacket-AVKL_NN4_hero.png"
-  },
-  {
-    id: "3",
-    nome: "Enduro Boa&reg; Hydration Pack",
-    imagem: "http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/enduro-boa-hydration-pack-AJQZ_JK3_hero.png"
-  }
-];
-var carrinho = [];
+let qtdCarrinho = 0;
+
+const carrinhoPersistido = JSON.parse(localStorage.getItem('carrinho'));
+const carrinho = carrinhoPersistido === null ? [] : carrinhoPersistido;
+const ELEMENTO_CARREGANDO = '<i class="fas fa-spinner fa-pulse"></i> Carregando...';
 
 function comprarProduto(id) {
-  var qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
+  const qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
   qtdCarrinhoIcon.classList.remove('escondido');
   qtdCarrinho++;
   qtdCarrinhoIcon.textContent = qtdCarrinho;
 
-  var produtoNoCarrinho = carrinho.find(function (item) {
-    return item.produto === id
-  });
+  const produtoNoCarrinho = carrinho.find(item => item.produto === id);
 
   if (produtoNoCarrinho) {
     produtoNoCarrinho.qtd++;
-    return;
+  }
+  else {
+    carrinho.push({
+      produto: id,
+      qtd: 1
+    });
   }
 
-  carrinho.push({
-    produto: id,
-    qtd: 1
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+function carregarPaginaPrincipal() {
+  const menuHamburguer = document.querySelector('.menu-hamburger');
+  const menuMobile = document.querySelector('.menu-mobile');
+  menuHamburguer.addEventListener('click', () => {
+    menuMobile.classList.toggle('escondido');
   });
+
+  const listaProdutos = document.querySelector('.produtos');
+  listaProdutos.innerHTML = ELEMENTO_CARREGANDO;
+
+  fetch('/php/listarProdutos.php', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+    .then(res => res.json())
+    .then(produtos => {
+      listaProdutos.innerHTML = '';
+
+      for (let i = 0; i < 3; i++) {
+        const produto = produtos[i];
+
+        listaProdutos.innerHTML += `
+          <div class="produto produto-${produto.id}">
+            <img
+            src="${produto.imagem}">
+            <span>${produto.nome}</span>
+            <button onclick="comprarProduto(${produto.id})">Comprar</button>
+          </div>
+        `;
+      }
+    });
 }

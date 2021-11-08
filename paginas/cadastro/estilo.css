@@ -54,7 +54,8 @@ form {
   flex-direction: column; 
   gap: 8px;
 
-  width: 300px;
+  min-width: 300px;
+  max-width: 100%;
 }
 
 input {
@@ -93,6 +94,29 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.erro, .sucesso {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+
+  font-weight: bold;
+}
+
+.erro {
+  color: #FFF;
+  background-color: #da3357;
+}
+
+.sucesso {
+  background-color: #69da69;
+}
+
+.escondido {
+  display: none;
 }
 
 @media(max-width:600px) { 
