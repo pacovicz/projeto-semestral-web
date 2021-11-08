@@ -34,18 +34,18 @@ CREATE TABLE usuarios (
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE carrinhos (
-  id INT AUTO_INCREMENT, 
-  id_usuario INT NOT NULL, 
-	PRIMARY KEY(id),
-  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-);
+-- CREATE TABLE carrinhos (
+--   id INT AUTO_INCREMENT, 
+--   id_usuario INT NOT NULL, 
+-- 	PRIMARY KEY(id),
+--   FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+-- );
 
-CREATE TABLE item_carrinho (
-  id INT AUTO_INCREMENT, 
-  id_carrinho INT NOT NULL, 
-  id_produto INT NOT NULL, 
-	PRIMARY KEY(id),
-  FOREIGN KEY (id_carrinho) REFERENCES carrinhos(id),
-  FOREIGN KEY (id_produto) REFERENCES produtos(id)
-);
+-- CREATE TABLE item_carrinho (
+--   id INT AUTO_INCREMENT, 
+--   id_carrinho INT NOT NULL, 
+--   id_produto INT NOT NULL, 
+-- 	PRIMARY KEY(id),
+--   FOREIGN KEY (id_carrinho) REFERENCES carrinhos(id),
+--   FOREIGN KEY (id_produto) REFERENCES produtos(id)
+-- );
