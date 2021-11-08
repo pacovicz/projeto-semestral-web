@@ -25,3 +25,11 @@ VALUES
 ('MBJ Women.s Solid Short Sleeve Boat Neck V','https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg'),
 ('Rain Jacket Women Windbreaker Striped Climbing Raincoats','https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg'),
 ('BIYLACLESEN Women.s 3-in-1 Snowboard Jacket Winter Coats','https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg');
+
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT, 
+	nome VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	senha VARCHAR(255) NOT NULL,
+	PRIMARY KEY(id)
+);
