@@ -12,8 +12,8 @@ function typeWriter() {
 
 typeWriter();
 
-var qtdCarrinho = 0;
-var produtos = [
+let qtdCarrinho = 0;
+const produtos = [
   {
     id: "1",
     nome: "MEN'S BETTER THAN NAKED&trade; JACKET",
@@ -30,25 +30,34 @@ var produtos = [
     imagem: "http://images.thenorthface.com/is/image/TheNorthFace/236x204_CLR/enduro-boa-hydration-pack-AJQZ_JK3_hero.png"
   }
 ];
-var carrinho = [];
+
+const carrinhoPersistido = JSON.parse(localStorage.getItem('carrinho'));
+
+const carrinho = carrinhoPersistido === undefined ? carrinhoPersistido : [];
 
 function comprarProduto(id) {
-  var qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
+  const qtdCarrinhoIcon = document.querySelector('.qtd-carrinho');
   qtdCarrinhoIcon.classList.remove('escondido');
   qtdCarrinho++;
   qtdCarrinhoIcon.textContent = qtdCarrinho;
 
-  var produtoNoCarrinho = carrinho.find(function (item) {
-    return item.produto === id
-  });
+  const produtoNoCarrinho = carrinho.find(item => item.produto === id);
 
   if (produtoNoCarrinho) {
     produtoNoCarrinho.qtd++;
-    return;
+  }
+  else {
+    carrinho.push({
+      produto: id,
+      qtd: 1
+    });
   }
 
-  carrinho.push({
-    produto: id,
-    qtd: 1
-  });
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
 }
+
+const menuHamburguer = document.querySelector('.menu-hamburger');
+const menuMobile = document.querySelector('.menu-mobile');
+menuHamburguer.addEventListener('click', () => {
+  menuMobile.classList.toggle('escondido');
+});
