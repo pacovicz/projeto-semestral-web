@@ -1,15 +1,11 @@
-function cadastrar(event, form) {
+function login(event, form) {
   event.preventDefault();
   const erroContainer = document.querySelector('.erro');
-  const sucessoContainer = document.querySelector('.sucesso');
   erroContainer.innerHTML = '';
   erroContainer.classList.add('escondido');
-  sucessoContainer.innerHTML = '';
-  sucessoContainer.classList.add('escondido');
-
 
   const formData = new URLSearchParams(new FormData(form))
-  fetch('../../php/criarUsuario.php', {
+  fetch('../../php/login.php', {
     method: "POST",
     body: formData
   })
@@ -21,10 +17,7 @@ function cadastrar(event, form) {
         return;
       }
 
-      sucessoContainer.innerHTML = 'Usuário cadastrado com sucesso!';
-      sucessoContainer.classList.remove('escondido');
-      setTimeout(() => {
-        window.location.href = '../login/index.html';
-      }, 1500);
+      localStorage.setItem('usuario', JSON.stringify(data));
+      window.location.href = '../../index.html'
     });
 }

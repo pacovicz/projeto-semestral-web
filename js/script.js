@@ -46,6 +46,20 @@ function carregarPaginaPrincipal() {
     menuMobile.classList.toggle('escondido');
   });
 
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  if (usuario) {
+    const botaoLogin = document.querySelector('.botao.login');
+    botaoLogin.href = '';
+    botaoLogin.innerHTML = 'Sair';
+    botaoLogin.addEventListener('click', () => {
+      localStorage.removeItem('usuario');
+      botaoLogin.innerHTML = 'Login';
+      setTimeout(() => {
+        botaoLogin.href = '/projeto-semestral-web/paginas/login/index.html';
+      }, 1000);
+    });
+  }
+
   const listaProdutos = document.querySelector('.produtos');
   listaProdutos.innerHTML = ELEMENTO_CARREGANDO;
 
