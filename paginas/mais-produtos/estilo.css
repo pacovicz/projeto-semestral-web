@@ -76,6 +76,10 @@ h2 {
   font-weight: bold;
 }
 
+.produtos .fas {
+  font-size: 42px;
+}
+
 @media (max-width: 768px) {
   body {
       min-height: unset;
