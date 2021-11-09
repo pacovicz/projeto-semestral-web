@@ -82,7 +82,7 @@ function carregarPaginaPrincipal() {
   const listaProdutos = document.querySelector('.produtos');
   listaProdutos.innerHTML = ELEMENTO_CARREGANDO;
 
-  fetch('../php/listarProdutos.php', {
+  fetch('../projeto-semestral-web/php/listarProdutos.php', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

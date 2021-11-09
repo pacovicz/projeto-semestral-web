@@ -1,9 +1,10 @@
 <?php
 
-$conn = mysqli_connect("localhost:8080", "root", "root", "phpdb");
+$conn = mysqli_connect("localhost:3306", "root", "", "phpdb");
 
 if ($conn->connect_error) {
-  die("Conexão falhou: " . $conn->connect_error);
+  echo json_encode ("Conexão falhou: " . $conn->connect_error); 
+  return;
 }
 
 $result = mysqli_query($conn, "

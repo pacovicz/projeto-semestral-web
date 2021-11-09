@@ -3,7 +3,7 @@
 $email = $_POST["email"];
 $senha = $_POST["senha"];
 
-$conn = mysqli_connect("localhost:8080", "root", "root", "phpdb");
+$conn = mysqli_connect("localhost:3306", "root", "", "phpdb");
 
 if ($conn->connect_error) {
   die("Conexão falhou: " . $conn->connect_error);
