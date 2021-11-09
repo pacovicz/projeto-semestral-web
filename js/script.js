@@ -73,7 +73,7 @@ function carregarPaginaPrincipal() {
         localStorage.removeItem('usuario');
         botaoLogin.innerHTML = 'Login';
         setTimeout(() => {
-          botaoLogin.href = '/projeto-semestral-web/paginas/login/index.html';
+          botaoLogin.href = './paginas/login/index.html';
         }, 1000);
       });
     });
@@ -82,7 +82,7 @@ function carregarPaginaPrincipal() {
   const listaProdutos = document.querySelector('.produtos');
   listaProdutos.innerHTML = ELEMENTO_CARREGANDO;
 
-  fetch('/php/listarProdutos.php', {
+  fetch('../php/listarProdutos.php', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
